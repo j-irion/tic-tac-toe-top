@@ -10,7 +10,7 @@ body {
     grid-template-rows: repeat(3, 1fr);
     height: 600px;
     width: 600px;
-    outline: 1px solid blue;
+    gap: 3px;
 }
 
 .gameboard > div {
@@ -20,4 +20,24 @@ body {
     height: 100%;
     width: 100%;
     font-size: 40px;
+}
+
+.gameboard > div:nth-child(3n-2) {
+    border-right: 3px black solid;
+    margin-right: -3px;
+}
+
+.gameboard > div:nth-child(3n) {
+    border-left: 3px black solid;
+    margin-left: -3px;
+}
+
+.gameboard > div:nth-child(-n+3) {
+    border-bottom: 3px black solid;
+    margin-bottom: -3px;
+}
+
+.gameboard > div:nth-child(n+7):nth-child(-n+9) {
+    border-top: 3px black solid;
+    margin-top: -3px;
 }
