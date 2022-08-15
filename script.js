@@ -5,6 +5,8 @@ const gameboard = (() => {
     ["", "", ""],
   ];
 
+  let isCross = true;
+
   const setBoard = (array) => {
     gameboardArray = array;
   };
@@ -15,14 +17,38 @@ const gameboard = (() => {
       for (j = 0; j < 3; j++) {
         let field = document.createElement("div");
         field.textContent = gameboardArray[i][j];
+        field.className = "field";
+        field.id = `${i}-${j}`;
         document.querySelector(".gameboard").appendChild(field);
       }
     }
+    _addClickEvent();
+  };
+
+  const getRow = (element) => {
+    return element.id.charAt(0);
+  };
+
+  const getColumn = (element) => {
+    return element.id.charAt(2);
+  };
+
+  const _addClickEvent = () => {
+    document.querySelectorAll(".field").forEach((field) => {
+      field.addEventListener("click", () => {
+        if (field.textContent !== "") return;
+        gameboardArray[getRow(field)][getColumn(field)] = isCross ? "x" : "o";
+        isCross = !isCross;
+        show();
+      });
+    });
   };
 
   return {
     show,
     setBoard,
+    getRow,
+    getColumn,
     gameboardArray,
   };
 })();
@@ -33,7 +59,5 @@ const test = [
   ["o", "o", "x"],
 ];
 
-gameboard.setBoard(test);
-console.log(gameboard.gameboardArray);
-console.log(gameboard.gameboardArray[0][0]);
+//gameboard.setBoard(test);
 gameboard.show();
