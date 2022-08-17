@@ -41,3 +41,10 @@ body {
     border-top: 3px black solid;
     margin-top: -3px;
 }
+
+form {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
