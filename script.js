@@ -11,6 +11,19 @@ const gameboard = (() => {
     gameboardArray = array;
   };
 
+  const reset = () => {
+    gameboardArray = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ];
+    document.querySelector(".gameboard").innerHTML = "";
+    document.getElementById("p1").value = "";
+    document.getElementById("p2").value = "";
+    document.getElementById("msg").style.display = "block";
+    isCross = true;
+  };
+
   const show = () => {
     document.querySelector(".gameboard").innerHTML = "";
     for (i = 0; i < 3; ++i) {
@@ -40,8 +53,14 @@ const gameboard = (() => {
         gameboardArray[getRow(field)][getColumn(field)] = isCross ? "x" : "o";
         isCross = !isCross;
         show();
-        if (game.checkWin(gameboardArray)) _displayWinner();
-        if (game.checkDraw(gameboardArray)) _displayDraw();
+        if (game.checkWin(gameboardArray)) {
+          _displayWinner();
+          game.reset();
+        }
+        if (game.checkDraw(gameboardArray)) {
+          _displayDraw();
+          game.reset();
+        }
       });
     });
   };
@@ -61,6 +80,7 @@ const gameboard = (() => {
     getRow,
     getColumn,
     gameboardArray,
+    reset,
   };
 })();
 
@@ -75,6 +95,11 @@ const game = (() => {
     document.getElementById("msg").style.display = "none";
     document.getElementsByClassName("gameboard")[0].style.display = "grid";
     gameboard.show();
+  };
+
+  const reset = () => {
+    players = new Array(2);
+    gameboard.reset();
   };
 
   const getP1 = () => {
@@ -140,6 +165,7 @@ const game = (() => {
     checkDraw,
     getP1,
     getP2,
+    reset,
   };
 })();
 
