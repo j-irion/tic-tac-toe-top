@@ -8,6 +8,17 @@
   </head>
   <body>
     <h1>Tic Tac Toe</h1>
+    <form action="#" onsubmit="game.initializeGame(event)">
+      <div>
+        Player 1
+        <input type="text" name="p1" id="p1" required />
+      </div>
+      <div>
+        Player 2
+        <input type="text" name="p2" id="p2" required />
+      </div>
+      <button type="submit">Start</button>
+    </form>
     <div class="gameboard"></div>
   </body>
 </html>
