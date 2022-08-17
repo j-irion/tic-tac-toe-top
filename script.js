@@ -7,10 +7,6 @@ const gameboard = (() => {
 
   let isCross = true;
 
-  const setBoard = (array) => {
-    gameboardArray = array;
-  };
-
   const reset = () => {
     gameboardArray = [
       ["", "", ""],
@@ -38,11 +34,11 @@ const gameboard = (() => {
     _addClickEvent();
   };
 
-  const getRow = (element) => {
+  const _getRow = (element) => {
     return element.id.charAt(0);
   };
 
-  const getColumn = (element) => {
+  const _getColumn = (element) => {
     return element.id.charAt(2);
   };
 
@@ -50,7 +46,7 @@ const gameboard = (() => {
     document.querySelectorAll(".field").forEach((field) => {
       field.addEventListener("click", () => {
         if (field.textContent !== "") return;
-        gameboardArray[getRow(field)][getColumn(field)] = isCross ? "x" : "o";
+        gameboardArray[_getRow(field)][_getColumn(field)] = isCross ? "x" : "o";
         isCross = !isCross;
         show();
         if (game.checkWin(gameboardArray)) {
@@ -76,9 +72,6 @@ const gameboard = (() => {
 
   return {
     show,
-    setBoard,
-    getRow,
-    getColumn,
     gameboardArray,
     reset,
   };
@@ -168,12 +161,6 @@ const game = (() => {
     reset,
   };
 })();
-
-const test = [
-  ["x", "o", "x"],
-  ["o", "x", "o"],
-  ["o", "o", "x"],
-];
 
 const playerFactory = (name, isCross) => {
   return { name, isCross };
