@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Archivo', sans-serif;
+    background-color: black;
+    color: white;
 }
 
 .gameboard {
@@ -23,28 +28,65 @@ body {
 }
 
 .gameboard > div:nth-child(3n-2) {
-    border-right: 3px black solid;
+    border-right: 3px white solid;
     margin-right: -3px;
 }
 
 .gameboard > div:nth-child(3n) {
-    border-left: 3px black solid;
+    border-left: 3px white solid;
     margin-left: -3px;
 }
 
 .gameboard > div:nth-child(-n+3) {
-    border-bottom: 3px black solid;
+    border-bottom: 3px white solid;
     margin-bottom: -3px;
 }
 
 .gameboard > div:nth-child(n+7):nth-child(-n+9) {
-    border-top: 3px black solid;
+    border-top: 3px white solid;
     margin-top: -3px;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 48px;
 }
 
 form {
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 30px;
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+form div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+form input {
+    font-family: 'Archivo', sans-serif;
+    font-size: 16px;
+    width: 150px;
+    height: 25px;
+    border: none;
+    border-radius: 8px;
+    text-indent: 8px;
+}
+
+form input::placeholder {
+    font-family: 'Archivo', sans-serif;
+}
+
+button {
+    width: 100px;
+    height: 27px;
+    border: none;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 16px;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
 }
