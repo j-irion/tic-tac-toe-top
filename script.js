@@ -41,6 +41,7 @@ const gameboard = (() => {
         isCross = !isCross;
         show();
         console.log(game.checkWin(gameboardArray));
+        console.log(game.checkDraw(gameboardArray));
       });
     });
   };
@@ -61,6 +62,13 @@ const game = (() => {
       _checkColumnWin(field) ||
       _checkDiagonalWin(field)
     ) {
+      return true;
+    }
+    return false;
+  };
+
+  const checkDraw = (field) => {
+    if (field.every((row) => row.every((x) => x !== "")) && !checkWin(field)) {
       return true;
     }
     return false;
@@ -99,6 +107,7 @@ const game = (() => {
 
   return {
     checkWin,
+    checkDraw,
   };
 })();
 
