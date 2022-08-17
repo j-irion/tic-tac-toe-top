@@ -40,10 +40,19 @@ const gameboard = (() => {
         gameboardArray[getRow(field)][getColumn(field)] = isCross ? "x" : "o";
         isCross = !isCross;
         show();
-        console.log(game.checkWin(gameboardArray));
-        console.log(game.checkDraw(gameboardArray));
+        if (game.checkWin(gameboardArray)) _displayWinner();
+        if (game.checkDraw(gameboardArray)) _displayDraw();
       });
     });
+  };
+
+  const _displayWinner = () => {
+    let winner = !isCross ? game.getP1() : game.getP2();
+    alert(`${winner.name} has won!`);
+  };
+
+  const _displayDraw = () => {
+    alert("It's a draw!");
   };
 
   return {
@@ -56,6 +65,26 @@ const gameboard = (() => {
 })();
 
 const game = (() => {
+  let players = new Array(2);
+
+  const initializeGame = (event) => {
+    event.preventDefault();
+    players[0] = playerFactory(document.getElementById("p1").value, true);
+    players[1] = playerFactory(document.getElementById("p2").value, false);
+    console.log(players);
+    document.getElementById("msg").style.display = "none";
+    document.getElementsByClassName("gameboard")[0].style.display = "grid";
+    gameboard.show();
+  };
+
+  const getP1 = () => {
+    return players[0];
+  };
+
+  const getP2 = () => {
+    return players[1];
+  };
+
   const checkWin = (field) => {
     if (
       _checkRowWin(field) ||
@@ -106,8 +135,11 @@ const game = (() => {
   };
 
   return {
+    initializeGame,
     checkWin,
     checkDraw,
+    getP1,
+    getP2,
   };
 })();
 
@@ -117,5 +149,6 @@ const test = [
   ["o", "o", "x"],
 ];
 
-//gameboard.setBoard(test);
-gameboard.show();
+const playerFactory = (name, isCross) => {
+  return { name, isCross };
+};
